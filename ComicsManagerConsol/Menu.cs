@@ -27,7 +27,7 @@ namespace ComicsManagerConsol
 
         #region Menu Methods
 
-        public static void MainMenu()
+        public static void MainMenu()   //  Huvudmeny
         {
             string choice;
             do

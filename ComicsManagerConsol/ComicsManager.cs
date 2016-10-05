@@ -13,11 +13,6 @@ namespace ComicsManagerConsol
 
         private static List<string> comicDataList;
         private static string[] comicDataArray;
-        private static string publisher;
-        private static string title;
-        private static string issue;
-        private static string artist;
-        private static string year;
 
         #endregion
 
@@ -32,31 +27,6 @@ namespace ComicsManagerConsol
         {
             get { return comicDataArray; }
             set { comicDataArray = value; }
-        }
-        public static string Publisher
-        {
-            get { return publisher; }
-            set { publisher = value; }
-        }
-        public static string Title
-        {
-            get { return title; }
-            set { title = value; }
-        }
-        public static string Issue
-        {
-            get { return issue; }
-            set { issue = value; }
-        }
-        public static string Artist
-        {
-            get { return artist; }
-            set { artist = value; }
-        }
-        public static string Year
-        {
-            get { return year; }
-            set { year = value; }
         }
 
         #endregion
@@ -81,59 +51,65 @@ namespace ComicsManagerConsol
         }
         public static string InputInformation() //  Frågeställningsmetod
         {
+            string publisher;
+            string title;
+            string issue;
+            string artist;
+            string year;
             string input;
             const string formatPublisher = "{0,-15}";
             const string formatTitle = "{0,-20}";
             const string formatArtist = "{0,-10}";
+
             Console.WriteLine("-----------------------------------------------------------------------------");
             Console.WriteLine("\n\t\t\t      Enter information:\n");
 
             do
             {
                 Console.Write("\t\t\t  Publisher:    ");
-                Publisher = Console.ReadLine();
-            } while (Publisher.Length < 1);
+                publisher = Console.ReadLine();
+            } while (publisher.Length < 1);
 
-            if (Publisher.Length < 15)
+            if (publisher.Length < 15)
             {
-                Publisher = string.Format(formatPublisher, Publisher);
+                publisher = string.Format(formatPublisher, publisher);
             }
 
             do
             {
                 Console.Write("\t\t\t  Title: \t");
-                Title = Console.ReadLine();
-            } while (Title.Length < 1);
+                title = Console.ReadLine();
+            } while (title.Length < 1);
 
-            if (Title.Length < 20)
+            if (title.Length < 20)
             {
-                Title = string.Format(formatTitle, Title);
+                title = string.Format(formatTitle, title);
             }
 
             do
             {
                 Console.Write("\t\t\t  Issue: \t");
-                Issue = Console.ReadLine();
-            } while (Issue.Length < 1 || Issue.Length > 4);
+                issue = Console.ReadLine();
+            } while (issue.Length < 1 || issue.Length > 4);
 
             do
             {
                 Console.Write("\t\t\t  Artist: \t");
-                Artist = Console.ReadLine();
-            } while (Artist.Length < 1);
+                artist = Console.ReadLine();
+            } while (artist.Length < 1);
 
-            if (Artist.Length < 10)
+            if (artist.Length < 10)
             {
-                Artist = string.Format(formatArtist, Artist);
+                artist = string.Format(formatArtist, artist);
             }
 
             do
             {
                 Console.Write("\t\t\t  Year: \t");
-                Year = Console.ReadLine();
-            } while (Year.Length < 1 || Year.Length > 4);
+                year = Console.ReadLine();
+            } while (year.Length < 1 || year.Length > 4);
 
-            return input = Publisher + "\t" + Title + "\t" + Issue + "\t" + Artist + "\t" + Year;
+            return input = publisher + "\t" + title + "\t" + issue + "\t" + artist + "\t" + year;
         }
         public static void AddToList()  //  Lägger till information i listan
         {
