@@ -201,6 +201,7 @@ namespace ComicsManagerConsol
 
             input = Publisher + "\t" + Title + "\t" + Issue + "\t" + Artist + "\t" + Year;
 
+            ComicDataList.RemoveAt(index);
             ComicDataList.Insert(index, input);
             Console.WriteLine("\n-----------------------------------------------------------------------------");
             Console.WriteLine("\t\t    Comic edited, press key to continue.");
