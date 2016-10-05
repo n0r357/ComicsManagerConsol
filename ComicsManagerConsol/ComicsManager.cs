@@ -63,12 +63,12 @@ namespace ComicsManagerConsol
 
         #region ComicsManager Methods
 
-        public static void LoadFile()
+        public static void LoadFile()   //  Hämtar listan från fil
         {
             ComicDataArray = File.ReadAllLines("ComicDataArray.txt");
             ComicDataList = new List<string>(ComicDataArray);
-        }   //  Hämtar listan från fil
-        public static void ShowList()
+        }
+        public static void ShowList()   //  Visar listan på skärmen
         {
             int index;
             Console.WriteLine("   Publisher:\t\tTitle:\t\t\tIssue:\tArtist:\t\tYear:\n");
@@ -78,8 +78,8 @@ namespace ComicsManagerConsol
                 Console.WriteLine(index + ". " + comic);
             }
             Console.WriteLine("");
-        }   //  Visar listan på skärmen
-        public static void AddToList()
+        }
+        public static string InputInformation() //  Frågeställningsmetod
         {
             string input;
             const string formatPublisher = "{0,-15}";
@@ -133,82 +133,33 @@ namespace ComicsManagerConsol
                 Year = Console.ReadLine();
             } while (Year.Length < 1 || Year.Length > 4);
 
-            input = Publisher + "\t" + Title + "\t" + Issue + "\t" + Artist + "\t" + Year;
-
-            ComicDataList.Add(input);
+            return input = Publisher + "\t" + Title + "\t" + Issue + "\t" + Artist + "\t" + Year;
+        }
+        public static void AddToList()  //  Lägger till information i listan
+        {
+            ComicDataList.Add(InputInformation());
 
             Console.WriteLine("\n-----------------------------------------------------------------------------");
             Console.WriteLine("\t\t    Comic added, press key to continue.");
             Console.WriteLine("-----------------------------------------------------------------------------");
             Console.ReadKey();
-        }   //  Lägger till information i listan
-        public static void EditItemInList()
+        }
+        public static void EditItemInList() //  Redigerar ett val i listan
         {
             int index;
-            string input;
-            const string formatPublisher = "{0,-15}";
-            const string formatTitle = "{0,-20}";
-            const string formatArtist = "{0,-10}";
             Console.WriteLine("-----------------------------------------------------------------------------");
             Console.Write("\t\t\t   Select comic to edit: ");
             index = Int32.Parse(Console.ReadLine()) - 1;
-            Console.WriteLine("\n\t\t\t      Enter information:\n");
-
-            do
-            {
-                Console.Write("\t\t\t  Publisher:    ");
-                Publisher = Console.ReadLine();
-            } while (Publisher.Length < 1);
-
-            if (Publisher.Length < 15)
-            {
-                Publisher = string.Format(formatPublisher, Publisher);
-            }
-
-            do
-            {
-                Console.Write("\t\t\t  Title: \t");
-                Title = Console.ReadLine();
-            } while (Title.Length < 1);
-
-            if (Title.Length < 20)
-            {
-                Title = string.Format(formatTitle, Title);
-            }
-
-            do
-            {
-                Console.Write("\t\t\t  Issue: \t");
-                Issue = Console.ReadLine();
-            } while (Issue.Length < 1 || Issue.Length > 4);
-
-            do
-            {
-                Console.Write("\t\t\t  Artist: \t");
-                Artist = Console.ReadLine();
-            } while (Artist.Length < 1);
-
-            if (Artist.Length < 10)
-            {
-                Artist = string.Format(formatArtist, Artist);
-            }
-
-            do
-            {
-                Console.Write("\t\t\t  Year: \t");
-                Year = Console.ReadLine();
-            } while (Year.Length < 1 || Year.Length > 4);
-
-            input = Publisher + "\t" + Title + "\t" + Issue + "\t" + Artist + "\t" + Year;
 
             ComicDataList.RemoveAt(index);
-            ComicDataList.Insert(index, input);
+            ComicDataList.Insert(index, InputInformation());
+
             Console.WriteLine("\n-----------------------------------------------------------------------------");
             Console.WriteLine("\t\t    Comic edited, press key to continue.");
             Console.WriteLine("-----------------------------------------------------------------------------");
             Console.ReadKey();
-        }   //  Redigerar ett val i listan
-        public static void RemoveFromList()
+        }
+        public static void RemoveFromList() //  Tar bort ett val från listan
         {
             int input;
             Console.WriteLine("-----------------------------------------------------------------------------");
@@ -219,15 +170,15 @@ namespace ComicsManagerConsol
             Console.WriteLine("\t\t    Comic removed, press key to continue.");
             Console.WriteLine("-----------------------------------------------------------------------------");
             Console.ReadKey();
-        }   //  Tar bort ett val från listan
-        public static void SaveFile()
+        }
+        public static void SaveFile()   //  Sparar listan till fil
         {
             File.WriteAllLines(@"ComicDataArray.txt", ComicDataArray = ComicDataList.ToArray());
             Console.WriteLine("-----------------------------------------------------------------------------");
             Console.WriteLine("\t\t    Comics saved, press key to continue.");
             Console.WriteLine("-----------------------------------------------------------------------------");
             Console.ReadKey();
-        }   //  Sparar listan till fil
+        }
 
         #endregion
     }
